@@ -1,0 +1,17 @@
+{% extends 'blogapp/base_container.html' %}
+{% load static %}
+{% block content %}
+
+<header class="p-3 border-bottom mb-5">  
+    <i class="fa-solid fa-circle-nodes fa-2xl "></i>
+    <span class="fs-4 ms-3 fw-bold">Rest API</span>
+</header>
+
+
+  <h4>Dostęp do danych listy zatwierdzonych tematów:</h4>
+  <p class="py-3">{% url 'api:get_topics' %}?format=json</p>
+  <h4>Dostęp do danych pojedynczego tematu:</h4>
+  <p class="py-3">{% url 'api:api' %}get_topic/(<i>ID_TEMATU</i>)/?format=json</p>
+  
+
+{% endblock content %}

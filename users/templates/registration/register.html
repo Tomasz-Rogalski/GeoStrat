@@ -1,0 +1,76 @@
+{% extends 'blogapp/base_container.html' %}
+{% block content %}
+
+  <div class="d-flex justify-content-center user-select-none py-5">
+    <div class="userCard bg-dark">
+      <div class="d-flex justify-content-center mb-2 ">
+        <h3 class="text-light">Zarejestruj konto</h3>
+      </div>
+      <div class="d-flex justify-content-center text-center text-primary">
+        <form method="POST" action="">
+          {% csrf_token %}      
+          <div id="form_text_inputs">             
+            <div class="input-group mb-3">
+              <div>
+                <span class="input-group-text bg-primary"><i class="icon-user-1 text-light"></i></span>
+              </div>
+              {{form.username}}
+            </div>
+            <div class="input-group mb-3">
+              <div>
+                <span class="input-group-text bg-primary"><i class="icon-mail-1 text-light"></i></span>
+              </div>
+              {{form.email}}
+            </div>
+            <div class="input-group mb-3">
+              <div>
+                <span class="input-group-text bg-primary"><i class="icon-key-outline text-light"></i></span>
+              </div>
+              {{form.password1}}
+            </div>
+            <div class="input-group mb-3">
+              <div>
+                <span class="input-group-text bg-primary"><i class="icon-key-outline text-light"></i></span>
+              </div>
+              {{form.password2}}
+            </div>
+          </div> 
+          <div class="text-start p-2">
+            <p class="text-light text-center text-uppercase py-2 border-bottom border-top border-primary fw-bold">Uprawnienia:</p>     
+            <div class="form-check" id="form_radio_inputs">
+              {{form.permissions}}
+            </div>
+          </div>          
+          <button type="submit" class="btn btn-primary text-light my-3">Zarejestruj się</button>
+        </form>
+      </div>
+      
+      {% if form.errors %}
+      <div class="alert alert-warning mx-4 my-2" role="alert ">{{form.errors}}</div>
+      {% endif %}
+
+      <div>
+        <div class="d-flex text-light bg-dark justify-content-center">
+          Masz już konto? <a class="link-primary ms-2" href="{% url 'users:login' %}">Zaloguj się</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+      var input_fields = form_text_inputs.getElementsByTagName('input')
+      for (var field in input_fields){	
+          input_fields[field].className += ' form-control'
+      }
+
+      var radio_fields = form_radio_inputs.getElementsByTagName('input')
+      for (var field in radio_fields){	
+          radio_fields[field].className += ' form-check-input'
+          
+      }
+  </script>
+
+{% endblock content %}
+
+

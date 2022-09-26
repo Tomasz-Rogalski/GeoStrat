@@ -1,0 +1,47 @@
+{% extends 'blogapp/base_container.html' %}
+{% load static %}
+{% block content %}
+
+
+<header class="p-3 border-bottom mb-5">
+    <i class="fa-solid fa-circle-info fa-2xl"></i>
+    <span class="fs-4 ms-3 fw-bold">O stronie</span>
+</header>
+
+<div class="row p-2 mb-4 bg-light rounded-3 border border-secondary">
+  <div class="container-fluid col-md-7 p-5">
+    <h1 class="display-5 fw-bold ">Przęglądaj i komentuj</h1>
+    <p class="fs-4 text-secondary">Geostrat.pl jest serwisem o charakterze <b>popularno &ndash; naukowym</b>, umożliwiającym publikację i edycję treści. Portal udostępnia możliwośc komentowania i dyskusji.</p>
+  </div>
+  <img class ="col-md-4 offset-md-1 img-fluid shadow p-2" src="{% static 'images/geostrat1.PNG' %}" alt="image">
+</div>
+
+  <div class="row p-2 mb-4 bg-light rounded-3 border border-secondary">
+    <img class ="col-md-4 img-fluid shadow p-2" src="{% static 'images/geostrat2.PNG' %}" alt="image">
+    <div class="container-fluid col-md-7 offset-md-1 p-5 d-flex flex-column" style="text-align:right;">
+      <h1 class="display-5 fw-bold">Twórz własne tematy</h1>
+      <p class="fs-4 align-self-end text-secondary">Zamieszczaj własną treść zgodną z regulaminem, rozwijaj swoje konto i napisz coś o sobie, daj się poznać innym uzytkownikom!</p>
+    </div>
+  </div>
+ 
+
+  <div class="row p-2 mb-4 bg-light rounded-3 border border-secondary">
+    <div class="container-fluid col-md-7 p-5">
+      <h1 class="display-5 fw-bold">Rola serwisu</h1>
+      <p class=" fs-4 text-secondary">Strona nie jest serwisem przeznaczonym do masowego użytku, pwostał w celu prezentacji projektu we framework'u Django. Co nie zmienia faktu, że dalej z powodzeniem pełni rolę dydaktyczną!</p>
+    </div>
+    <img class ="col-md-4 offset-md-1 img-fluid shadow p-2" src="{% static 'images/geostrat5.PNG' %}" alt="image">
+  </div>
+
+  <div class="row p-2 mb-4 bg-light rounded-3 border border-secondary">
+    <img class ="col-md-4 img-fluid p-2" src="{% static 'images/_defaults/default_user.png' %}" alt="image">
+    <div class="container-fluid col-md-7 offset-md-1 p-5 d-flex flex-column" style="text-align:right;">
+      <h1 class="display-5 fw-bold">Autor</h1>
+      <p class="fs-4 align-self-end text-secondary">Jeśli masz jakieś pytania lub jesteś zainteresowany współpracą, wszelkie potrzebne informacje znajdziesz za pomocą poniższego linku.</p>
+      <button type ='submit' class="btn btn-secondary ff-rd text-ligh align-self-end" style="width:30%; min-height: 50px;"><a class ="link-light" href="https://rogalskitportfolio.herokuapp.com/">Strona autora</a></button>
+    </div>
+    
+  </div>
+
+
+{% endblock content %}

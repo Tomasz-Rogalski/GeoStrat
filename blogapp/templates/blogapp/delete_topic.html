@@ -1,0 +1,30 @@
+{% extends 'blogapp/base_container.html' %}
+{% load static %}
+{% block content %}
+
+<header class="p-3 border-bottom mb-5">
+    <i class="fa-solid fa-file-circle-xmark fa-2xl"></i>
+    <span class="fs-4 ms-3 fw-bold">Usuń temat: {{topic.title}}</span>
+</header>
+  
+<div class="alert alert-danger text-center mt-3 mx-auto" style="max-width:80%;" role="alert">
+    <h5 class="fw-bold">Czy na pewno chcesz usunąć temat "<a class="text-decoration-none link-danger" href="{% url 'blogapp:topic' topic.id %}">{{topic.title}}</a>"?</h5>
+        {% if topic.header_image %}
+        <img class="img-fluid user-select-none p-3" style="max-width:60%; border-radius: 30px;" src="{{topic.header_image.url}}">  
+        {% else %}
+        <img class="img-fluid user-select-none p-3" style="max-width:60%; border-radius: 30px;" src="{% static 'images/_defaults/default_topic.png' %}">  
+        {% endif %}            
+    <p>Powiązane dane zostaną utracone nieodwracalnie.</p>
+      <form class="d-inline ms-1" action="{% url 'blogapp:delete_topic' topic.id %}" method = 'post'>
+        {% csrf_token %}
+        <button type="sumbit" class="btn btn-danger ff-rd" name='submit'>Usuń</button>
+      </form>
+      <form class="d-inline me-1" action="{% url 'blogapp:index' 0 %}" method ='get'>        
+        <button type="sumbit" class="btn btn-secondary ff-rd" name='submit'>Wróć</button>
+      </form>
+      
+      
+    
+  
+</div>
+{% endblock content %}

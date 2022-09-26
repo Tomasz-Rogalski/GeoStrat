@@ -1,0 +1,54 @@
+{% extends 'blogapp/base_container.html' %}
+
+{% block content %}
+
+<header class="p-3 border-bottom">
+    <i class="fa-solid fa-image fa-2xl"></i>
+    <span class="fs-4 ms-3 fw-bold">Galeria</span>
+</header>
+
+<div class="row bg-light mt-3">      
+  {% for image in images %}
+    {% if image.show_in_gallery %}
+      <div class="col-xl-4 col-md-6 col-sm-12 p-3">        
+          <div class="divImg user-select-none">
+            <img id= "myImg{{image.id}}" class="img-fluid myImg border border-secondary rounded" src="{{image.image.url}}" alt='{{image.topic.title}} &mdash; {{image.description}}'>
+          </div> 
+          <p class="text-center text-capitalize text-secondary fs-4">{{image.name}}</p>
+      </div>
+
+      <div id="myModal{{image.id}}" class="myModal user-select-none">
+        <span id="close{{image.id}}" class="myClose">&times;</span>
+        <img id="img{{image.id}}" class="myModal-content">
+        <div id="caption{{image.id}}" class="myCaption"></div>
+      </div>
+  
+      <script>
+        // Get the modal
+        var modal = document.getElementById('myModal{{image.id}}');
+        
+        // Get the image and insert it
+        var img = document.getElementById('myImg{{image.id}}');
+        var modalImg = document.getElementById("img{{image.id}}");
+        var captionText = document.getElementById("caption{{image.id}}");
+        img.onclick = function(){
+          modal.style.display = "block";
+          document.body.style.overflow = 'hidden';
+          modalImg.src = this.src;
+          captionText.innerHTML = this.alt;
+        }
+            
+            var span = document.getElementById("close{{image.id}}");      
+            //Close modal      
+            span.onclick = function() { 
+              modal.style.display = "none";
+              document.body.style.overflow = 'visible';
+            }
+            </script>
+    {% endif %}
+  {% endfor %}
+
+</div>
+
+{% endblock content %}
+

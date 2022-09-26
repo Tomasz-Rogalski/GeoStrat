@@ -1,0 +1,49 @@
+{% extends 'blogapp/base_container.html' %}
+{% block content %}
+
+<header class="p-3 border-bottom mb-5">
+    <i class="fa-solid fa-folder-open fa-2xl"></i>
+    <span class="fs-4 ms-3 fw-bold">Moje tematy</span>
+</header>
+
+{% if topics %}
+<table class="table">
+  <thead>
+    <tr class="text-secondary">
+      <th scope="col">Tytuł</th>
+      <th scope="col">Utworzono</th>
+      <th scope="col">Zmodyfikowano</th>
+      <th scope="col">Edytuj</th>
+      <th scope="col">Usuń</th>
+      <th scope="col">Status</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for topic in topics %}
+      <tr>
+        <td class=""><a class="text-decoration-none fst-italic text-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title}}</a></td>
+        <td class="">{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</td>
+        <td class="">{{topic.date_modified|date:"d-m-y"}}; {{topic.date_modified|time:"H:i"}}</td>
+        <td class="ps-4"><a class="link-secondary" href="{% url 'blogapp:edit_topic' topic.id %}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+        <td class="ps-4"><a class="link-secondary" href="{% url 'blogapp:delete_topic' topic.id %}"><i class="fa-solid fa-trash-can"></i></a></td>
+        {% if topic.confirmed %}
+          <td>Zatwierdzony</td>
+        {% else %}
+          <td>Oczekuje na zatwierdzenie</td>
+        {% endif %}
+      </tr>      
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p class="p-3 fw-bold text-center">Nie dodałeś jeszcze żadnego tematu.<br><a class="link-dark fs-3" href="{% url 'blogapp:new_topic' %}">Dodaj temat</a></p>
+{% endif %}
+
+
+
+  
+
+
+
+{% endblock content %}

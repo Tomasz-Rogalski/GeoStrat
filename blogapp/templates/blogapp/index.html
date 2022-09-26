@@ -1,0 +1,89 @@
+{% extends 'blogapp/base_nocontainer.html' %}
+{% load static %}
+{% block base %}
+
+<div class="container mt-3">
+  
+  <header class="p-3 border-bottom">
+      <i class="fa-solid fa-house fa-2x"></i>
+      <span class="fs-4 ms-3 fw-bold mt-2">Strona główna &mdash; ostatnie artykuły</span>
+  </header>
+
+  <!-- HEADER ARTICLE -->  
+  {% if not page.nr %}
+    {% if last_topic %}
+    <header class="">
+      <div class="text-dark rounded bg-dark my-3">
+          <div class="row">
+          <div class="col-lg-6 py-2 px-4 order-last order-lg-first">
+            <a class="text-decoration-none ff-rd link-light" href="{% url 'blogapp:topic' last_topic.id %}"><h1 class="display-4">{{last_topic.title}}</h1></a>         
+            <p class="lead text-light fst-italic fs-4" style="text-align:justify;">{{last_topic.short_description}}</p>
+            <a class="text-decoration-none fs-5" href="{% url 'blogapp:topic' last_topic.id %}" >Czytaj dalej...</a>
+          </div>
+          <div class="col-lg-6 mx-auto">
+            {% if last_topic.header_image %}
+            <img class="img-fluid p-1" style="border-radius: 30px 0px 0px 30px;" src="{{last_topic.header_image.url}}"> 
+            {% else %}
+            <img class="img-fluid p-1" style="border-radius: 30px 0px 0px 30px;" src="{% static 'images/_defaults/default_topic.png' %}">
+            {% endif %}
+          </div>
+        </div>    
+      </div>      
+    </header>
+    {% endif %}
+  {% endif %}
+</div>
+<!-- REST ARTICLEs -->
+<div class="container-fluid bg-light">
+  <div class="container my-3">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      {% for topic in topics %}
+        <div class="col">
+          <div class="card shadow-sm" style="min-height:100% !important;">
+            {% if topic.header_image %}
+            <img class="img-fluid" src="{{ topic.header_image.url }}">   
+            {% else %}
+            <img class="img-fluid" src="{% static 'images/_defaults/default_topic.png' %}">  
+            {% endif %} 
+            <div class="card-body position-relative">
+              <h3 class="text-center fw-bold fs-2">
+                <a class="text-decoration-none link-dark" href="{% url 'blogapp:topic' topic.id %}">{{topic.title|upper}}</a>
+              </h3>
+              <p class="card-text pb-3">{{topic.short_description}}</p>              
+              <div class="position-absolute bottom-0 start-50 translate-middle-x d-flex justify-content-between px-3 py-2" style="width:100%;">                
+                  <a class="link-secondary fw-bold" href="{% url 'blogapp:topic' topic.id %}">Czytaj dalej...</a>                
+                <small class="text-muted ms-auto">{{topic.date_created|date:"d-m-y"}}; {{topic.date_created|time:"H:i"}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        Brak tematów
+      {% endfor %}
+    </div>
+  </div>
+    <!--PAGGINATION  -->
+  <nav class="p-md-4 p-2" aria-label="...">
+    <ul class="pagination pagination-lg justify-content-center user-select-none">
+      {% if page.nr > 0 %}
+      <li class="page-item">
+      {% else %}
+      <li class="page-item disabled">
+      {% endif %}
+        <a class="page-link" href="{% url 'blogapp:index' page.prev_nr %}" tabindex="-1" aria-disabled="true">Poprzednia</a>
+      </li>
+      <li class="page-item" aria-current="page">
+        <a class="page-link" href="{% url 'blogapp:index' page.nr %}">{{page.nr}}</a>
+      </li>
+      {% if page.nr < page.last_nr %}
+      <li class="page-item">
+      {% else %}
+      <li class="page-item disabled">
+      {% endif %}
+        <a class="page-link" href="{% url 'blogapp:index' page.next_nr %}">Następna</a>
+      </li>
+    </ul>
+  </nav>
+</div>  
+{% endblock base %}
+
